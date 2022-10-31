@@ -59,7 +59,7 @@ router.post('/admin/login', (req, res) => {
 
                 const token = jwt.sign(userForToken,'secret',{expiresIn: '1h'})
                 
-                res.status(200).json({token})
+                res.status(200).json({token: token, message: "Login successful."})
 
             } else {
                 res.status(401).json({ message: "Login failed. Password incorrect." });
@@ -86,7 +86,7 @@ router.post('/admin/is-auth', (req,res) => {
 
     res.status(200).json({})
 })
-//
+
 const getTokenFrom = req => {
     const authorization = req.get('authorization')
 
