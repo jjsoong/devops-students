@@ -10,16 +10,7 @@ router.get('/', (req, res) =>{
     FormPost.find({})
         .then((rawData) => {
             console.log('data retrieved');
-            let data = rawData.map((obj) => ({
-                firstName: obj.firstName,
-                lastName: obj.lastName,
-                favoritePet: obj.favoritePet,
-                favoriteColor: obj.favoriteColor,
-                message: obj.message,
-                _id: obj._id
-            }));
-
-            res.status(200).json(data)
+            res.status(200).json(rawData);
         })
         .catch((error) =>{
             console.log('Could not retrieve data from mongodb database.');

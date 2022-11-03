@@ -42,13 +42,13 @@ module.exports = function(dbName) {
     server.app = app;
 
     // Functions for testing purposes.
-    server.add = function (data) {
+    server.add = async function (data) {
         const newData = new FormPost(data);
-        newData.save((err) => {
-            if (err) {
-                console.error(`Could not save data to mongodb.\nError: ${err}`);
-            }
+        let savedId;
+        await newData.save().then(savedDoc => {
+            savedId = savedDoc._id.toString();
         });
+        return savedId;
     };
 
     server.drop = async function() {
