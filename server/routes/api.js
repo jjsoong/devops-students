@@ -105,7 +105,7 @@ router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
  *                          type: array
  *                          items:
  *                              $ref: '#/components/schemas/retrieve'
- *          '404':
+ *          '500':
  *              description: Could not retrieve data from mongodb database
  */
 
@@ -179,7 +179,7 @@ router.post('/save', (req, res) =>{
  *      responses:
  *          200: 
  *              description: Data successfuly retreived
- *          400:
+ *          404:
  *              description: Could not retrieve data from mongodb database
  */
 
@@ -212,7 +212,7 @@ router.get('/search/:id', (req, res) => {
  *            schema:
  *              type: string
  *      responses:
- *          201: 
+ *          200: 
  *              description: Data successfuly deleted from mongodb database
  *          401:
  *              description: Token missing or invalid
@@ -305,7 +305,7 @@ router.put('/admin/edit/:id', (req, res) => {
  *          - admin
  *      description: This api is used to sign in as an admin. 
  *      responses:
- *          201: 
+ *          200: 
  *              description: Login success.
  *          401:
  *              description: Login failed. Password incorrect.
@@ -349,7 +349,7 @@ router.post('/admin/login', (req, res) => {
  *          - admin
  *      description: This api is used to check if a user is authorized
  *      responses:
- *          201: 
+ *          200: 
  *              description: User is authorized
  *          401:
  *              description: User is not authorzied (token missing or invalid)
