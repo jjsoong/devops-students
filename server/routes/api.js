@@ -118,6 +118,7 @@ router.get('/', (req, res) =>{
         })
         .catch((error) =>{
             console.log('Could not retrieve data from mongodb database.');
+            res.status(500).json({ message: `Internal server error, could not retrieve data from mongodb database.\nError: ${error.message}`});
         });
 })
 
@@ -192,6 +193,7 @@ router.get('/search/:id', (req, res) => {
         })
         .catch((error) =>{
             console.log(`Could not retrieve data from mongodb database.\n${error.message})`);
+            res.status(404).json({message: "Error, invalid id"});
         });
 })
 
@@ -233,7 +235,7 @@ router.delete('/admin/delete/:id', (req, res) =>{
             FormPost.findByIdAndDelete(`${id}`)
                 .then((rawData) => {
                     console.log(rawData);
-                    res.status(201).json({ message: `id ${id} data successfuly deleted from to mongodb database` });
+                    res.status(200).json({ message: `id ${id} data successfuly deleted from to mongodb database` });
                 })
                 .catch((error) =>{
                     res.status(404).json({ message: `Query failed. Could not delete data from mongodb database.\nError: ${error}` });
@@ -281,7 +283,7 @@ router.put('/admin/edit/:id', (req, res) => {
                                         favoritePet: newdata.favoritePet,favoriteColor: newdata.favoriteColor,
                                         message: newdata.message}}, {new: true})
                 .then(() => {
-                    res.status(200).json({ message: `id ${id} data successfuly updated` });
+                    res.status(201).json({ message: `id ${id} data successfuly updated` });
                 })
                 .catch((error) => {
                     res.status(404).json({ message: `Could not update data.\nError: ${error}` });
